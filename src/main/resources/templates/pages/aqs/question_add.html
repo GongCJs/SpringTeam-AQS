@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>添加问题</title>
+		<link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+		<link rel="stylesheet" href="../kindeditor/plugins/code/prettify.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../bower_components/div/css/question_add.css">
+	</head>
+	<body>
+		<div class="author">
+			<span class="question">
+				<input class="questiontext" name="questionIntroduce" type="text" placeholder="请输入标题">
+			</span>
+			<!-- 编辑页 -->
+			<div class="editor">
+				<textarea id="editorArea" name="questionContent">
+				</textarea>
+				<p style="text-align: right;">
+					<input type="button" name="appendHtml" class="btn btn-info" value="末尾添加HTML">
+					<a href="#userlogin" role="button" class="btn btn-primary" data-toggle="modal">提交问题</a>
+				</p>
+			</div>
+			<!-- 预览页 -->
+			<div class="preview">
+				<div class="previewBody">
+				</div>
+			</div>
+		</div>
+		
+		<!-- 弹出登录框 -->
+		<div class="modal fade" id="userlogin" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							选项
+						</h4>
+					</div>
+					<div class="modal-body center">
+						请选择问题类型
+						<select id="single" class="form-control form-control-chosen">
+						</select>
+						是否所有人可见<br>
+						公共<input type="radio" checked="checked" name="ifpublic" value="1">
+						私有<input type="radio" name="ifpublic" value="0">
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <button type="button" id="addQuestion" class="btn btn-primary">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!-- jQuery 3 -->
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script charset="utf-8" src="../kindeditor/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="../kindeditor/plugins/code/prettify.js"></script>
+	<script>
+		KindEditor.ready(function(K) {
+			var editorArea = K.create('#editorArea', {
+				width:'100%',
+				height:$(document).height()-100+'px',
+				cssPath : '../kindeditor/plugins/code/prettify.css',
+				uploadJson : '../file/upload.do',
+				fileManagerJson : '../jsp/file_manager_json.jsp',
+				allowFileManager : true,
+				allowImageRemote: false,
+				afterCreate : function(){
+					var self = this;
+					$(".previewBody").html("<h1 style='text-align:center;padding-top: 30%'>浏览区</h1>")
+					//绑定添加事件
+					$("#addQuestion").click(function(){
+						var questionIntroduce = $(".questiontext").val();
+						var questionContent = self.html();
+						var questionTypeId = $("#single").val();
+						var questionIfpublic = $("input[name='ifpublic']:checked").val();
+						if(questionIntroduce == ''){
+							alert("标题不能为空");
+							return;
+						}
+						if(questionContent == ''){
+							alert("没有输入任何内容哟");
+							return;
+						}
+						var param =
+						{		
+								questionIntroduce : questionIntroduce,
+								questionContent : questionContent,
+								questionTypeId : questionTypeId,
+								questionIfpublic : questionIfpublic
+						}
+						$.post("../question/addQuestion.do",param,function(result){
+							alert(result.message);
+							if(result.state == 1){
+								$(window).attr('location','../index');
+							}else{
+							}
+							
+							return;
+						});
+					})
+				},
+				afterChange : function(){
+					let $yl = $(".previewBody");
+					$yl.html(this.html());
+					$yl.scrollTop($yl[0].scrollHeight);
+				},
+				items:[
+			        'undo', 'redo', '|', 'print', 'template', 'code',
+			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+			        'table', 'hr', 'emoticons', 'pagebreak','link', 'unlink'
+				]
+			});
+			$("input[name='appendHtml']").click(function(){
+				editorArea.appendHtml('</br>');
+				editorArea.focus();
+			})
+			prettyPrint();
+		});
+		$(function(){
+			//获取问题类型
+			doFindObjectsTypes();
+		})
+		
+		//获取问题类型
+		function doFindObjectsTypes(){
+			var url="../type/doFindObjectsTypes";
+			$.getJSON(url,function(result){
+				for(var info in result.data){
+					$("#single").append("<option value="+result.data[info].quesitonTypeId+">"+result.data[info].questionTypeName+"</option>");
+				}
+			});
+		}
+	</script>
+</html>
