@@ -6,11 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("team.spring.aqs.mapper")
+
+/* 测试 */
 public class AQSApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AQSApplication.class, args);
 	}
-
-	
-	
 }
