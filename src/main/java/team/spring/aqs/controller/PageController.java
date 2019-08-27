@@ -29,4 +29,10 @@ public class PageController {
 	public String answerQuestion() {
 		return "aqs/answer_question";
 	}
+	
+	//websocket
+	@RequestMapping("testWebSocket")
+	public String testWebSocket() {
+		return "websocket/firstWebSocket";
+	}
 }
