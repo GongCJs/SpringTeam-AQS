@@ -1,0 +1,30 @@
+body{
+		background-color: #f5f6f7;
+	}
+ul li{
+	text-align: left;
+	list-style-type: none;
+}
+.questionType{
+	background:white;
+}
+.questionContent{
+	margin-top: 60px;
+}
+.questionList>div{
+	border-top: 1px solid #000000;
+}
+.questionInfo>li{
+	border-top: 1px solid #000000;
+	background: white;
+}
+.questionInfo>li:hover{
+	background: #DBDBDB;
+}
+.questionInfo>li:last-child{
+	border-bottom: 1px solid #000000;
+}
+.questionInfo>li>span:first-child{
+	font-size: 24px;
+	font-weight: bold;
+}

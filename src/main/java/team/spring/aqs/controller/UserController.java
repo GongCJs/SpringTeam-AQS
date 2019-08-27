@@ -18,7 +18,7 @@ import team.spring.aqs.vo.JsonResult;
 
 @Controller
 @RequestMapping("/user")
-public class userController {
+public class UserController {
 	String code;
 	@Autowired
 	UserService userservice;

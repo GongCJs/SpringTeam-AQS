@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.spring.aqs.mapper.aqsRolesMapper">
+  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsRoles">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_note" jdbcType="VARCHAR" property="roleNote" />
+    <result column="role_created_time" jdbcType="TIMESTAMP" property="roleCreatedTime" />
+    <result column="role_modified_time" jdbcType="TIMESTAMP" property="roleModifiedTime" />
+    <result column="role_created_user" jdbcType="VARCHAR" property="roleCreatedUser" />
+    <result column="role_modified_user" jdbcType="VARCHAR" property="roleModifiedUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, role_note, role_created_time, role_modified_time, role_created_user, 
+    role_modified_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aqs_roles
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from aqs_roles
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="team.spring.aqs.entity.aqsRoles">
+    insert into aqs_roles (role_id, role_name, role_note, 
+      role_created_time, role_modified_time, 
+      role_created_user, role_modified_user)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleNote,jdbcType=VARCHAR}, 
+      #{roleCreatedTime,jdbcType=TIMESTAMP}, #{roleModifiedTime,jdbcType=TIMESTAMP}, 
+      #{roleCreatedUser,jdbcType=VARCHAR}, #{roleModifiedUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsRoles">
+    insert into aqs_roles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleNote != null">
+        role_note,
+      </if>
+      <if test="roleCreatedTime != null">
+        role_created_time,
+      </if>
+      <if test="roleModifiedTime != null">
+        role_modified_time,
+      </if>
+      <if test="roleCreatedUser != null">
+        role_created_user,
+      </if>
+      <if test="roleModifiedUser != null">
+        role_modified_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNote != null">
+        #{roleNote,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreatedTime != null">
+        #{roleCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleModifiedTime != null">
+        #{roleModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCreatedUser != null">
+        #{roleCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="roleModifiedUser != null">
+        #{roleModifiedUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsRoles">
+    update aqs_roles
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNote != null">
+        role_note = #{roleNote,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreatedTime != null">
+        role_created_time = #{roleCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleModifiedTime != null">
+        role_modified_time = #{roleModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCreatedUser != null">
+        role_created_user = #{roleCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="roleModifiedUser != null">
+        role_modified_user = #{roleModifiedUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsRoles">
+    update aqs_roles
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_note = #{roleNote,jdbcType=VARCHAR},
+      role_created_time = #{roleCreatedTime,jdbcType=TIMESTAMP},
+      role_modified_time = #{roleModifiedTime,jdbcType=TIMESTAMP},
+      role_created_user = #{roleCreatedUser,jdbcType=VARCHAR},
+      role_modified_user = #{roleModifiedUser,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

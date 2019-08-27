@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>主页</title>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/div/css/index.css">
+	</head>
+	<body>
+		<!-- 标题 -->
+		<div>
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">AQSSystem</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							 <a href="#">首页</a>
+						</li>
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<form class="navbar-form navbar-left" role="search">
+								<div class="form-group">
+									<input id="information" type="text" class="form-control" placeholder="搜索问题" />
+								</div> <button id="search" type="button" class="btn btn-default">搜索</button>
+							</form>
+						</li>
+						<li>
+							 <a href="../aqs/questionAdd">提问题</a>
+						</li>
+						<li>
+							 <a href="#">消息</a>
+						</li>
+						<li>
+							<a href="#userlogin" role="button" class="btn" data-toggle="modal">登录</a>
+						</li>
+						<li>
+							<a href="#createUser" role="button" class="btn" data-toggle="modal">注册</a>
+						</li>
+						<li class="dropdown">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">名称<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li>
+									 <a href="#">个人中心</a>
+								</li>
+								<li>
+									 <a href="#">修改密码</a>
+								</li>
+								<li>
+									 <a href="#">退出</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+		<!-- 内容信息 -->
+		<div class="col-md-12 column questionContent">
+			<!-- 问题种类 -->
+			<div class="col-md-1 column">
+				<!-- 问题分类信息 -->
+				<ul id="question_type" class="nav nav-stacked nav-pills questionType">
+				</ul>
+			</div>
+			<!-- 问题列表 -->
+			<div class="col-md-8 column">
+				<ul class="questionInfo" id="questionInfo">
+					<li>
+						<span>标题</span></br>
+						<span>内容</span>
+					</li>
+				</ul>
+			</div>
+			
+			<!-- 今日推荐 -->
+			<div class="col-md-3 column">
+				<ul id="questionInfo2" class="questionInfo">
+					<li>
+						<span>标题</span></br>
+						<span>内容</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- 弹出登录框 -->
+		<div class="modal fade" id="userlogin" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							登录
+						</h4>
+					</div>
+					<div class="modal-body center">
+							邮箱：<input type="text" id="mailBox" class="form-control userInfo">
+							密码：<input type="password" id="password" class="form-control userInfo">
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <button type="button" id="login" class="btn btn-primary">登录</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 弹出注册框 -->
+		<div class="modal fade" id="createUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							注册
+						</h4>
+					</div>
+					<div class="modal-body center">
+						<span id="point"></span></br>
+						邮件：<input type="text" name="email" onblur="patteren()" class="form-control">
+						<input type="button" onclick="getVerificationCode()" id="getcode" class="btn btn-info disabled" disabled="true" value="获取验证码" /></br>
+						名称：<input type="text" name="username" class="form-control">
+						验证码：<input type="text" name="verificationCode" onchange="verificationCodeEques()" class="form-control">
+						密码：<input type="password" name="password1" class="form-control">
+						确认密码：<input type="password" name="password2" onblur="require()" class="form-control">
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						 <button type="button" onclick="saveUser()" id="createUser" class="btn btn-primary ">注册</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script>
+	//获取验证码
+		function getVerificationCode(){
+			var email = $("input[name='email']").val();
+			
+			var param = {
+					email:email
+			}
+			$.post("user/getVerificationCode",param,function(result){
+				if(result.state == 0){
+					alert(result.message);				
+				}else{
+					alert(result.message)
+				}
+			})
+			$("#getcode").addClass("disabled")
+			$("#getcode").attr("disabled","true")
+		}
+		//验证信息是否正确
+		function verificationCodeEques(){	
+			var verificationCode = $("input[name='verificationCode']").val();
+			var param = {
+					code:verificationCode
+			}
+
+		//验证码长度验证
+			if(codeLength(verificationCode)){
+				$.post("user/verificationCodeEques",param,function(result){
+					if(result.state == 0){
+						alert(result.message);
+						return;
+					}
+					$("#createUser").removeClass("disabled");
+				})
+			}
+		}
+		
+		
+		//邮箱格式验证
+		function patteren(){
+			var email = $("input[name='email']").val();
+			if(email==""){
+				$("#point").html("<font color='red'>邮箱不可为空!</font>");
+			}
+			var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if(!pattern.exec(email)){
+				$("#point").html("<font color='red'>邮箱格式不正确!</font>");
+				$("#getcode").addClass("disabled")
+				$("#getcode").attr("disabled","true")
+			}else{
+				$("#point").html("");
+				$("#getcode").removeClass("disabled")
+				$("#getcode").removeAttr("disabled")
+			}
+		}
+		//验证码长度验证
+		function codeLength(code){
+			if(code.length == 6){
+				return true;
+			}else if(code.length>=7){
+				alert("请输入6位验证码");
+				return false;
+			}
+		}
+		//验证密码
+		function require(){
+			var password1=$("input[name='password1']").val();
+			var password2=$("input[name='password2']").val();
+			if(password1!=password2){
+				$("#point").html("<font color='red'>两次密码不一致!</font>");
+			}else{
+				debugger;
+				$("#point").html("");	
+			}
+		}
+		//保存注册信息
+		function saveUser(){
+			var url="user/doSaveUser";
+			var param={
+			mail:$("input[name='email']").val(),
+			name:$("input[name='username']").val(),	
+			password:$("input[name='password1']").val()
+			};
+			
+			$.getJSON(url,param,function(result){
+				if(result.state==1){
+					   alert("注册成功")
+				   }else{
+					   alert("注册失败")
+				   }		   
+			})
+		}		
+		
+		
+		//记载所有信息
+		$(function(){
+			doFindObjectsTypes();
+			findQuestionByType(null,2,$("#questionInfo2"));
+			findQuestionByType(null,1,$("#questionInfo"));
+			
+		})
+		//获取问题类型
+		function doFindObjectsTypes(){
+			var url="type/doFindObjectsTypes";
+			$.getJSON(url,function(result){	
+				doSetTableBodyRows(result.data);
+			});
+		}
+		function doSetTableBodyRows(data){
+			console.log(data)
+			var tBody=$("#question_type");
+			for(var i=0;i<data.length;i++){
+	 			var li=$("<li></li>");
+	 			var a="<a href='#' onclick=findQuestionByType('"+data[i].quesitonTypeId+"') >"+data[i].questionTypeName+"</a>";
+	 			li.append(a)
+	 			tBody.append(li)
+	 		}
+		}
+		//加载问题展示
+		function findQuestionByType(questionTypeId,type,$area){
+			if($area == null || type==null){
+				$area=$("#questionInfo");
+				type=1;
+			}
+			var param ={
+					questionTypeId : questionTypeId,
+					type:type
+			};
+			$.getJSON("question/doFindQuestionByType",param,function(result){
+				$area.html("")
+				for(var index in result.data){
+					var li = createQuestionLi(result.data[index]);
+					$ul = $area.append(li);
+				}
+			});
+		}
+		function createQuestionLi(data){
+			var lis = 
+				"<li>"+
+					"<span>"+data.questionIntroduce+"</span></br>"+
+					"<span>"+(data.questionContent).substring(0,10)+"</span></br>"+
+					"<span>创建时间:"+(data.questionCreateTime)+"</span>"+
+					"<span>访问数:"+data.questionPreviewCount+"</span>"+
+					"<span>点赞:"+data.questionPraise+"</span>"+
+					"<input type='hidden' value="+data.questionId+" />"+
+				"</li>"
+           return lis;
+		}
+		
+		//监听问题点击事件
+		$('ul.questionInfo').on('click','li',function () {
+			var questionId = $(this).find("input[type='hidden']").val();
+			$(window).attr('location','aqs/answerQuestion?questionId='+questionId);
+		});
+		
+		 //搜索
+		 $("#search").click(function(){
+			 var param={search:$(information).val()		 
+			 };
+			 var url="question/search";
+			 if($(information).val()==null){
+				 url="question/doFindQuestionByType?";
+				 param ={
+							questionTypeId : null,
+							type:1
+					};
+			 }	 
+			 $.getJSON(url,param,function(result){
+				 $("#questionInfo").html("")
+					for(var index in result.data){
+						var li = createQuestionLi(result.data[index]);
+						$("#questionInfo").append(li);
+					}
+				});
+		 })
+		 //登录
+		$("#login").click(function(){
+			   var url = "/user/login"; 
+			   var params={
+						 username:$("#mailBox").val(),
+						 password:$("#password").val()
+					  };
+			   $.post(url,params,function(result){
+				   if(result.state==1){
+					   alert("登录成功")
+					  
+				   }else{
+					   alert("登陆失败")
+				   }	   
+			   })
+		   })
+		
+	</script>
+</html>
