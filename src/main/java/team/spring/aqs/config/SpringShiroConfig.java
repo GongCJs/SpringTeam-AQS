@@ -59,6 +59,4 @@ public class SpringShiroConfig {
 	public AuthorizationAttributeSourceAdvisor newAuthorizationAttributeSourceAdvisor(SecurityManager securityManager) {
 		return new AuthorizationAttributeSourceAdvisor();
 	}
-	
-	
 }
