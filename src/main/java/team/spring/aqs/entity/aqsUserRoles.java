@@ -1,33 +1,21 @@
 package team.spring.aqs.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class aqsUserRoles {
     private String urId;
 
     private String userId;
 
     private String roleId;
-
-    public String getUrId() {
-        return urId;
-    }
-
-    public void setUrId(String urId) {
-        this.urId = urId == null ? null : urId.trim();
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
-    }
 }

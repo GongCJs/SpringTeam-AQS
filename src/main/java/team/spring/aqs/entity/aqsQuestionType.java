@@ -1,23 +1,18 @@
 package team.spring.aqs.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class aqsQuestionType {
     private String quesitonTypeId;
-
     private String questionTypeName;
 
-    public String getQuesitonTypeId() {
-        return quesitonTypeId;
-    }
-
-    public void setQuesitonTypeId(String quesitonTypeId) {
-        this.quesitonTypeId = quesitonTypeId == null ? null : quesitonTypeId.trim();
-    }
-
-    public String getQuestionTypeName() {
-        return questionTypeName;
-    }
-
-    public void setQuestionTypeName(String questionTypeName) {
-        this.questionTypeName = questionTypeName == null ? null : questionTypeName.trim();
-    }
 }
