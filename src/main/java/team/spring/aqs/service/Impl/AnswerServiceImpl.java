@@ -34,5 +34,4 @@ public class AnswerServiceImpl implements AnswerService {
 		List<aqsAnswer> findAnswerByQuestionid = mapper.findAnswerByQuestionid(questionId);
 		return findAnswerByQuestionid;
 	}
-
 }

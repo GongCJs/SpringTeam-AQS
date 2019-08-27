@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.spring.aqs.entity.aqsQuestion;
 import team.spring.aqs.service.AQSQuestionService;
-import team.spring.aqs.util.Uuid;
+import team.spring.aqs.util.UuidUtils;
 import team.spring.aqs.vo.JsonResult;
 
 @Controller
@@ -34,7 +34,7 @@ public class QuestionController {
 		record.setQuestionPraise(0);
 		record.setQuestionPreviewCount(0);
 		record.setQuestionCreateTime(new Date());
-		record.setQuestionId(Uuid.CreateUUID());
+		record.setQuestionId(UuidUtils.CreateUUID());
 		System.out.println(record);
 		int insert = queService.insert(record);
 		return new JsonResult(1,"发表成功：" +insert);

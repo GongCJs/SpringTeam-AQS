@@ -6,11 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.spring.aqs.entity.aqsAnswer;
 import team.spring.aqs.service.AnswerService;
-import team.spring.aqs.util.Uuid;
+import team.spring.aqs.util.UuidUtils;
 import team.spring.aqs.vo.JsonResult;
 
 @Controller
@@ -27,7 +26,7 @@ public class AnswerController {
 		aqsAnswer answer = new aqsAnswer();
 		answer.setAnswerContent(answerContent);
 		answer.setAnswerCreateTime(new Date());
-		answer.setAnswerId(Uuid.CreateUUID());
+		answer.setAnswerId(UuidUtils.CreateUUID());
 		answer.setQuestionId(questionId);
 		int addAnswer = service.addAnswer(answer);
 		return new JsonResult(1,"评论成功："+addAnswer);

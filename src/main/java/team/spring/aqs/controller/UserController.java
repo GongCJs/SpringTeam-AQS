@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.spring.aqs.entity.aqsUser;
 import team.spring.aqs.service.UserService;
-import team.spring.aqs.util.JunitMail;
+import team.spring.aqs.util.MailUtils;
 import team.spring.aqs.vo.JsonResult;
 
 
@@ -38,7 +38,7 @@ public class UserController {
 		@RequestMapping("/getVerificationCode")
 		@ResponseBody
 		public JsonResult getVerificationCode(String email) {
-			JunitMail jm = new JunitMail();
+			MailUtils jm = new MailUtils();
 			String sendMail = jm.sendMail(email);
 			code = sendMail.toLowerCase();
 			if(sendMail.equals("0")) {

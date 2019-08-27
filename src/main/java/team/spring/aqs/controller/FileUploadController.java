@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import team.spring.aqs.exception.FileException;
-import team.spring.aqs.util.Uuid;
+import team.spring.aqs.util.UuidUtils;
 import team.spring.aqs.vo.JsonFileInfo;
 
 @Controller
@@ -36,7 +36,7 @@ public class FileUploadController {
 			String fileName = file.getOriginalFilename();
 			if(ifFIleLeagl(fileName,dir)) {
 				//将file(上传文件)保存到指定目录下
-				toFile = new File(savePath,Uuid.CreateUUID()+fileName);
+				toFile = new File(savePath, UuidUtils.CreateUUID()+fileName);
 				file.transferTo(toFile);
 			}else {
 				throw new FileException("上传文件扩展名是不允许的扩展名。\n只允许" + fileType().get(dir) +"格式。");
