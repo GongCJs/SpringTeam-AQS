@@ -2,24 +2,24 @@ package team.spring.aqs.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import team.spring.aqs.entity.aqsUser;
+import team.spring.aqs.entity.AqsUser;
 
 @Mapper
 public interface aqsUserMapper {
     int deleteByPrimaryKey(String userAccount);
 
-    int insert(aqsUser record);
+    int insert(AqsUser record);
 
-    int insertSelective(aqsUser record);
+    int insertSelective(AqsUser record);
 
-    aqsUser selectByPrimaryKey(String userAccount);
+    AqsUser selectByPrimaryKey(String userAccount);
 
-    int updateByPrimaryKeySelective(aqsUser record);
+    int updateByPrimaryKeySelective(AqsUser record);
 
-    int updateByPrimaryKey(aqsUser record);
+    int updateByPrimaryKey(AqsUser record);
 
-	aqsUser doFindUserByUsername(String username);
+	AqsUser doFindUserByUsername(String username);
 
-	int saveUser(aqsUser user);
+	int saveUser(AqsUser user);
     
 }

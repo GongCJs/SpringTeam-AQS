@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.spring.aqs.mapper.aqsUserMapper">
-  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsUser">
-    <id column="user_account" jdbcType="VARCHAR" property="userAccount" />
-    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
-    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
-    <result column="user_sale" jdbcType="VARCHAR" property="userSale" />
-    <result column="user_valid" jdbcType="VARCHAR" property="userValid" />
-    <result column="user_introduce" jdbcType="VARCHAR" property="userIntroduce" />
-    <result column="user_create_time" jdbcType="TIMESTAMP" property="userCreateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="team.spring.aqs.entity.AqsUser">
+        <id column="user_account" jdbcType="VARCHAR" property="userAccount"/>
+        <result column="user_nickname" jdbcType="VARCHAR" property="userNickname"/>
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
+        <result column="user_sale" jdbcType="VARCHAR" property="userSale"/>
+        <result column="user_valid" jdbcType="VARCHAR" property="userValid"/>
+        <result column="user_introduce" jdbcType="VARCHAR" property="userIntroduce"/>
+        <result column="user_create_time" jdbcType="TIMESTAMP" property="userCreateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     user_account, user_nickname, user_password, user_sale, user_valid, user_introduce, 
     user_create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from aqs_user
-    where user_account = #{userAccount,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from aqs_user
+        where user_account = #{userAccount,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from aqs_user
     where user_account = #{userAccount,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.spring.aqs.entity.aqsUser">
+    <insert id="insert" parameterType="team.spring.aqs.entity.AqsUser">
     insert into aqs_user (user_account, user_nickname, user_password, 
       user_sale, user_valid, user_introduce, 
       user_create_time)
@@ -32,80 +32,80 @@
       #{userSale,jdbcType=VARCHAR}, #{userValid,jdbcType=VARCHAR}, #{userIntroduce,jdbcType=VARCHAR}, 
       #{userCreateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsUser">
-    insert into aqs_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userAccount != null">
-        user_account,
-      </if>
-      <if test="userNickname != null">
-        user_nickname,
-      </if>
-      <if test="userPassword != null">
-        user_password,
-      </if>
-      <if test="userSale != null">
-        user_sale,
-      </if>
-      <if test="userValid != null">
-        user_valid,
-      </if>
-      <if test="userIntroduce != null">
-        user_introduce,
-      </if>
-      <if test="userCreateTime != null">
-        user_create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userAccount != null">
-        #{userAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="userNickname != null">
-        #{userNickname,jdbcType=VARCHAR},
-      </if>
-      <if test="userPassword != null">
-        #{userPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="userSale != null">
-        #{userSale,jdbcType=VARCHAR},
-      </if>
-      <if test="userValid != null">
-        #{userValid,jdbcType=VARCHAR},
-      </if>
-      <if test="userIntroduce != null">
-        #{userIntroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="userCreateTime != null">
-        #{userCreateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsUser">
-    update aqs_user
-    <set>
-      <if test="userNickname != null">
-        user_nickname = #{userNickname,jdbcType=VARCHAR},
-      </if>
-      <if test="userPassword != null">
-        user_password = #{userPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="userSale != null">
-        user_sale = #{userSale,jdbcType=VARCHAR},
-      </if>
-      <if test="userValid != null">
-        user_valid = #{userValid,jdbcType=VARCHAR},
-      </if>
-      <if test="userIntroduce != null">
-        user_introduce = #{userIntroduce,jdbcType=VARCHAR},
-      </if>
-      <if test="userCreateTime != null">
-        user_create_time = #{userCreateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where user_account = #{userAccount,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsUser">
+    <insert id="insertSelective" parameterType="team.spring.aqs.entity.AqsUser">
+        insert into aqs_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userAccount != null">
+                user_account,
+            </if>
+            <if test="userNickname != null">
+                user_nickname,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+            <if test="userSale != null">
+                user_sale,
+            </if>
+            <if test="userValid != null">
+                user_valid,
+            </if>
+            <if test="userIntroduce != null">
+                user_introduce,
+            </if>
+            <if test="userCreateTime != null">
+                user_create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userAccount != null">
+                #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userNickname != null">
+                #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userSale != null">
+                #{userSale,jdbcType=VARCHAR},
+            </if>
+            <if test="userValid != null">
+                #{userValid,jdbcType=VARCHAR},
+            </if>
+            <if test="userIntroduce != null">
+                #{userIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreateTime != null">
+                #{userCreateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.AqsUser">
+        update aqs_user
+        <set>
+            <if test="userNickname != null">
+                user_nickname = #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userSale != null">
+                user_sale = #{userSale,jdbcType=VARCHAR},
+            </if>
+            <if test="userValid != null">
+                user_valid = #{userValid,jdbcType=VARCHAR},
+            </if>
+            <if test="userIntroduce != null">
+                user_introduce = #{userIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreateTime != null">
+                user_create_time = #{userCreateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_account = #{userAccount,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.AqsUser">
     update aqs_user
     set user_nickname = #{userNickname,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
@@ -115,19 +115,17 @@
       user_create_time = #{userCreateTime,jdbcType=TIMESTAMP}
     where user_account = #{userAccount,jdbcType=VARCHAR}
   </update>
-  
-  <select id="doFindUserByUsername" resultType="team.spring.aqs.entity.aqsUser">
+
+    <select id="doFindUserByUsername" resultType="team.spring.aqs.entity.AqsUser">
   	select * from aqs_user where user_account=#{username}
   </select>
-  
-  <insert id="saveUser" >
+
+    <insert id="saveUser">
     insert into aqs_user
     (user_account,user_nickname,user_password,user_sale,user_valid,user_introduce,user_create_time)
     values
     (#{userAccount,jdbcType=VARCHAR},#{userNickname,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userSale,jdbcType=VARCHAR},#{userValid,jdbcType=VARCHAR},#{userIntroduce,jdbcType=VARCHAR},#{userCreateTime,jdbcType=VARCHAR})
   </insert>
-  
-  
-  
-  
+
+
 </mapper>

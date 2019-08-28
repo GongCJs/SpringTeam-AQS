@@ -8,8 +8,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.spring.aqs.entity.aqsAnswer;
-import team.spring.aqs.entity.aqsUser;
+import team.spring.aqs.entity.AqsAnswer;
+import team.spring.aqs.entity.AqsUser;
 import team.spring.aqs.mapper.aqsAnswerMapper;
 import team.spring.aqs.service.AnswerService;
 
@@ -20,18 +20,18 @@ public class AnswerServiceImpl implements AnswerService {
 	
 	@RequiresUser
 	@Override
-	public int addAnswer(aqsAnswer answer) {
+	public int addAnswer(AqsAnswer answer) {
 		 Subject sub = SecurityUtils.getSubject();
-		 aqsUser userinfo = (aqsUser)sub.getPrincipal();
+		 AqsUser userinfo = (AqsUser)sub.getPrincipal();
 		 answer.setUserAccount(userinfo.getUserAccount());
 		 int insert = mapper.insert(answer);
 		return insert;
 	}
 
 	@Override
-	public List<aqsAnswer> findAnswerByQuestionid(String questionId) {
+	public List<AqsAnswer> findAnswerByQuestionid(String questionId) {
 		// TODO Auto-generated method stub
-		List<aqsAnswer> findAnswerByQuestionid = mapper.findAnswerByQuestionid(questionId);
+		List<AqsAnswer> findAnswerByQuestionid = mapper.findAnswerByQuestionid(questionId);
 		return findAnswerByQuestionid;
 	}
 }

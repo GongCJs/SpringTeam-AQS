@@ -1,29 +1,31 @@
 package team.spring.aqs.entity;
 
 import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsUser {
+public class AqsAnswer {
+    private String answerId;
+
     private String userAccount;
 
-    private String userNickname;
+    private String questionId;
 
-    private String userPassword;
+    private String answerSubId;
 
-    private String userSale;
+    private Date answerCreateTime;
 
-    private String userValid;
+    private String answerContent;
 
-    private String userIntroduce;
-
-    private Date userCreateTime;
+    
 }

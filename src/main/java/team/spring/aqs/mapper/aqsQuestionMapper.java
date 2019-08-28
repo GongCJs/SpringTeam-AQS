@@ -7,31 +7,31 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 
-import team.spring.aqs.entity.aqsQuestion;
+import team.spring.aqs.entity.AqsQuestion;
 
 @Mapper
 public interface aqsQuestionMapper {
     int deleteByPrimaryKey(String questionId);
 
-    int insert(aqsQuestion record);
+    int insert(AqsQuestion record);
 
-    int insertSelective(aqsQuestion record);
+    int insertSelective(AqsQuestion record);
 
-    aqsQuestion selectByPrimaryKey(String questionId);
+    AqsQuestion selectByPrimaryKey(String questionId);
 
-    int updateByPrimaryKeySelective(aqsQuestion record);
+    int updateByPrimaryKeySelective(AqsQuestion record);
 
-    int updateByPrimaryKeyWithBLOBs(aqsQuestion record);
+    int updateByPrimaryKeyWithBLOBs(AqsQuestion record);
 
-    int updateByPrimaryKey(aqsQuestion record);
-
-    
-    List<aqsQuestion> findObjects(String id);
+    int updateByPrimaryKey(AqsQuestion record);
 
     
-    List<aqsQuestion> findQuestionByType(@Param("questionTypeId")String questionTypeId,@Param("type")Integer type);
+    List<AqsQuestion> findObjects(String id);
 
-	List<aqsQuestion> findQuestionBySearch(String search);
+    
+    List<AqsQuestion> findQuestionByType(@Param("questionTypeId")String questionTypeId, @Param("type")Integer type);
+
+	List<AqsQuestion> findQuestionBySearch(String search);
 	
 	
 	@Update("UPDATE aqs_question SET question_preview_count = question_preview_count+1 WHERE question_id = #{questionId}")

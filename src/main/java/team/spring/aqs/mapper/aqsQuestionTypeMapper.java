@@ -2,20 +2,20 @@ package team.spring.aqs.mapper;
 
 import java.util.List;
 
-import team.spring.aqs.entity.aqsQuestionType;
+import team.spring.aqs.entity.AqsQuestionType;
 
 public interface aqsQuestionTypeMapper {
     int deleteByPrimaryKey(String quesitonTypeId);
 
-    int insert(aqsQuestionType record);
+    int insert(AqsQuestionType record);
 
-    int insertSelective(aqsQuestionType record);
+    int insertSelective(AqsQuestionType record);
 
-    aqsQuestionType selectByPrimaryKey(String quesitonTypeId);
+    AqsQuestionType selectByPrimaryKey(String quesitonTypeId);
 
-    int updateByPrimaryKeySelective(aqsQuestionType record);
+    int updateByPrimaryKeySelective(AqsQuestionType record);
 
-    int updateByPrimaryKey(aqsQuestionType record);
+    int updateByPrimaryKey(AqsQuestionType record);
     
-    List<aqsQuestionType> findObjectsTypes();
+    List<AqsQuestionType> findObjectsTypes();
 }

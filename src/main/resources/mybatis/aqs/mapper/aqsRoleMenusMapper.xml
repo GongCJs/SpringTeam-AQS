@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.spring.aqs.mapper.aqsRoleMenusMapper">
-  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsRoleMenus">
+  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.AqsRoleMenus">
     <id column="rm_id" jdbcType="VARCHAR" property="rmId" />
     <result column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="menu_id" jdbcType="VARCHAR" property="menuId" />
@@ -19,13 +19,13 @@
     delete from aqs_role_menus
     where rm_id = #{rmId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.spring.aqs.entity.aqsRoleMenus">
+  <insert id="insert" parameterType="team.spring.aqs.entity.AqsRoleMenus">
     insert into aqs_role_menus (rm_id, role_id, menu_id
       )
     values (#{rmId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsRoleMenus">
+  <insert id="insertSelective" parameterType="team.spring.aqs.entity.AqsRoleMenus">
     insert into aqs_role_menus
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="rmId != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsRoleMenus">
+  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.AqsRoleMenus">
     update aqs_role_menus
     <set>
       <if test="roleId != null">
@@ -62,7 +62,7 @@
     </set>
     where rm_id = #{rmId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsRoleMenus">
+  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.AqsRoleMenus">
     update aqs_role_menus
     set role_id = #{roleId,jdbcType=VARCHAR},
       menu_id = #{menuId,jdbcType=VARCHAR}

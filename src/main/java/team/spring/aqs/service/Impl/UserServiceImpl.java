@@ -6,7 +6,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.spring.aqs.entity.aqsUser;
+import team.spring.aqs.entity.AqsUser;
 import team.spring.aqs.exception.ServiceException;
 import team.spring.aqs.mapper.aqsUserMapper;
 import team.spring.aqs.service.UserService;
@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	aqsUserMapper userdao;
 	@Override
-	public int saveUser(aqsUser user) {
+	public int saveUser(AqsUser user) {
 		if(user.getUserAccount()==null||user.getUserAccount()=="") {
 			throw new ServiceException("邮箱不能为空");
 		}
@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService{
 	    user.setUserSale(salt);
 	    SimpleHash sHash = new SimpleHash("MD5", user.getUserPassword(), salt);
 	    user.setUserPassword(sHash.toHex());
-	    System.out.println(user);
 		return userdao.saveUser(user);
 	}
 	

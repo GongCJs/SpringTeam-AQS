@@ -1,17 +1,17 @@
 package team.spring.aqs.mapper;
 
-import team.spring.aqs.entity.aqsMenus;
+import team.spring.aqs.entity.AqsMenus;
 
 public interface aqsMenusMapper {
     int deleteByPrimaryKey(String menuId);
 
-    int insert(aqsMenus record);
+    int insert(AqsMenus record);
 
-    int insertSelective(aqsMenus record);
+    int insertSelective(AqsMenus record);
 
-    aqsMenus selectByPrimaryKey(String menuId);
+    AqsMenus selectByPrimaryKey(String menuId);
 
-    int updateByPrimaryKeySelective(aqsMenus record);
+    int updateByPrimaryKeySelective(AqsMenus record);
 
-    int updateByPrimaryKey(aqsMenus record);
+    int updateByPrimaryKey(AqsMenus record);
 }

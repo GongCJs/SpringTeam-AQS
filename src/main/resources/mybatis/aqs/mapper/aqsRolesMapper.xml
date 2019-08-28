@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.spring.aqs.mapper.aqsRolesMapper">
-  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsRoles">
+  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.AqsRoles">
     <id column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="role_note" jdbcType="VARCHAR" property="roleNote" />
@@ -24,7 +24,7 @@
     delete from aqs_roles
     where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.spring.aqs.entity.aqsRoles">
+  <insert id="insert" parameterType="team.spring.aqs.entity.AqsRoles">
     insert into aqs_roles (role_id, role_name, role_note, 
       role_created_time, role_modified_time, 
       role_created_user, role_modified_user)
@@ -32,7 +32,7 @@
       #{roleCreatedTime,jdbcType=TIMESTAMP}, #{roleModifiedTime,jdbcType=TIMESTAMP}, 
       #{roleCreatedUser,jdbcType=VARCHAR}, #{roleModifiedUser,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsRoles">
+  <insert id="insertSelective" parameterType="team.spring.aqs.entity.AqsRoles">
     insert into aqs_roles
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -81,7 +81,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsRoles">
+  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.AqsRoles">
     update aqs_roles
     <set>
       <if test="roleName != null">
@@ -105,7 +105,7 @@
     </set>
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsRoles">
+  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.AqsRoles">
     update aqs_roles
     set role_name = #{roleName,jdbcType=VARCHAR},
       role_note = #{roleNote,jdbcType=VARCHAR},

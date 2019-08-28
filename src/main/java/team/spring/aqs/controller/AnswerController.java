@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import team.spring.aqs.entity.aqsAnswer;
+import team.spring.aqs.entity.AqsAnswer;
 import team.spring.aqs.service.AnswerService;
 import team.spring.aqs.util.UuidUtils;
 import team.spring.aqs.vo.JsonResult;
@@ -23,7 +23,7 @@ public class AnswerController {
 	@ResponseBody
 	@RequestMapping("addAnswer.do")
 	public JsonResult addAnswer(String answerContent , String questionId) {
-		aqsAnswer answer = new aqsAnswer();
+		AqsAnswer answer = new AqsAnswer();
 		answer.setAnswerContent(answerContent);
 		answer.setAnswerCreateTime(new Date());
 		answer.setAnswerId(UuidUtils.CreateUUID());
@@ -35,7 +35,7 @@ public class AnswerController {
 	@ResponseBody
 	@RequestMapping("findAnswerByQuestionid.do")
 	public JsonResult findAnswerByQuestionid(String questionId) {
-		List<aqsAnswer> findAnswerByQuestionid = service.findAnswerByQuestionid(questionId);
+		List<AqsAnswer> findAnswerByQuestionid = service.findAnswerByQuestionid(questionId);
 		return new JsonResult(findAnswerByQuestionid);
 	}
 }

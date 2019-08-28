@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.spring.aqs.mapper.aqsUserRolesMapper">
-  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsUserRoles">
-    <id column="ur_id" jdbcType="VARCHAR" property="urId" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="team.spring.aqs.entity.AqsUserRoles">
+        <id column="ur_id" jdbcType="VARCHAR" property="urId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     ur_id, user_id, role_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from aqs_user_roles
-    where ur_id = #{urId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from aqs_user_roles
+        where ur_id = #{urId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from aqs_user_roles
     where ur_id = #{urId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.spring.aqs.entity.aqsUserRoles">
+    <insert id="insert" parameterType="team.spring.aqs.entity.AqsUserRoles">
     insert into aqs_user_roles (ur_id, user_id, role_id
       )
     values (#{urId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsUserRoles">
-    insert into aqs_user_roles
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="urId != null">
-        ur_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="roleId != null">
-        role_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="urId != null">
-        #{urId,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsUserRoles">
-    update aqs_user_roles
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ur_id = #{urId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsUserRoles">
+    <insert id="insertSelective" parameterType="team.spring.aqs.entity.AqsUserRoles">
+        insert into aqs_user_roles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="urId != null">
+                ur_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="urId != null">
+                #{urId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.AqsUserRoles">
+        update aqs_user_roles
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ur_id = #{urId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.AqsUserRoles">
     update aqs_user_roles
     set user_id = #{userId,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=VARCHAR}

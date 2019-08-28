@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsRoleMenus {
+public class AqsRoleMenus {
     private String rmId;
 
     private String roleId;

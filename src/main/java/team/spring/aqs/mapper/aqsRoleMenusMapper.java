@@ -1,17 +1,17 @@
 package team.spring.aqs.mapper;
 
-import team.spring.aqs.entity.aqsRoleMenus;
+import team.spring.aqs.entity.AqsRoleMenus;
 
 public interface aqsRoleMenusMapper {
     int deleteByPrimaryKey(String rmId);
 
-    int insert(aqsRoleMenus record);
+    int insert(AqsRoleMenus record);
 
-    int insertSelective(aqsRoleMenus record);
+    int insertSelective(AqsRoleMenus record);
 
-    aqsRoleMenus selectByPrimaryKey(String rmId);
+    AqsRoleMenus selectByPrimaryKey(String rmId);
 
-    int updateByPrimaryKeySelective(aqsRoleMenus record);
+    int updateByPrimaryKeySelective(AqsRoleMenus record);
 
-    int updateByPrimaryKey(aqsRoleMenus record);
+    int updateByPrimaryKey(AqsRoleMenus record);
 }

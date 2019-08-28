@@ -1,17 +1,17 @@
 package team.spring.aqs.mapper;
 
-import team.spring.aqs.entity.aqsLogs;
+import team.spring.aqs.entity.AqsLogs;
 
 public interface aqsLogsMapper {
     int deleteByPrimaryKey(String logId);
 
-    int insert(aqsLogs record);
+    int insert(AqsLogs record);
 
-    int insertSelective(aqsLogs record);
+    int insertSelective(AqsLogs record);
 
-    aqsLogs selectByPrimaryKey(String logId);
+    AqsLogs selectByPrimaryKey(String logId);
 
-    int updateByPrimaryKeySelective(aqsLogs record);
+    int updateByPrimaryKeySelective(AqsLogs record);
 
-    int updateByPrimaryKey(aqsLogs record);
+    int updateByPrimaryKey(AqsLogs record);
 }

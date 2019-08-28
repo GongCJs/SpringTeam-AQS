@@ -2,16 +2,16 @@ package team.spring.aqs.service;
 
 import java.util.List;
 
-import team.spring.aqs.entity.aqsQuestion;
+import team.spring.aqs.entity.AqsQuestion;
 
 public interface AQSQuestionService {
-	int insert(aqsQuestion record);
+	int insert(AqsQuestion record);
 	
-	List<aqsQuestion> findQuestionByType(String questionTypeId,Integer type);
+	List<AqsQuestion> findQuestionByType(String questionTypeId, Integer type);
 	
-	aqsQuestion selectByPrimaryKey(String questionId);
+	AqsQuestion selectByPrimaryKey(String questionId);
 
-	List<aqsQuestion> findQuestionBySearch(String search);
+	List<AqsQuestion> findQuestionBySearch(String search);
 	
 	Integer addQuestionPreviewCount(String questionId);
 }

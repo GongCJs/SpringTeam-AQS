@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import team.spring.aqs.entity.aqsUser;
+import team.spring.aqs.entity.AqsUser;
 import team.spring.aqs.service.UserService;
 import team.spring.aqs.util.MailUtils;
 import team.spring.aqs.vo.JsonResult;
@@ -22,54 +22,51 @@ public class UserController {
 	String code;
 	@Autowired
 	UserService userservice;
-	
+
 	@RequestMapping("/login")
 	@ResponseBody
-	public JsonResult doLogin(String username,String password) {
-		System.out.println(username);
-		System.out.println(password);
-		UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+	public JsonResult doLogin(String username, String password) {
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject subject = SecurityUtils.getSubject();
 		subject.login(token);
 		return new JsonResult("登录成功");
 	}
-	
+
 	//发送邮件
-		@RequestMapping("/getVerificationCode")
-		@ResponseBody
-		public JsonResult getVerificationCode(String email) {
-			MailUtils jm = new MailUtils();
-			String sendMail = jm.sendMail(email);
-			code = sendMail.toLowerCase();
-			if(sendMail.equals("0")) {
-				return new JsonResult(0,"邮件发送失败");
-			}
-			return new JsonResult(1,"邮件发送成功");
+	@RequestMapping("/getVerificationCode")
+	@ResponseBody
+	public JsonResult getVerificationCode(String email) {
+		MailUtils jm = new MailUtils();
+		String sendMail = jm.sendMail(email);
+		code = sendMail.toLowerCase();
+		if (sendMail.equals("0")) {
+			return new JsonResult(0, "邮件发送失败");
 		}
-		
-		//验证输入验证码是否合法
-		@RequestMapping("/verificationCodeEques")
-		@ResponseBody
-		public JsonResult verificationCodeEques(String code) {
-			code = code.toLowerCase();
-			if(code.equals(this.code)) {
-				return new JsonResult(1,"验证码正确");
-			}else {
-				return new JsonResult(0,"验证码错误");
-			}
+		return new JsonResult(1, "邮件发送成功");
+	}
+
+	//验证输入验证码是否合法
+	@RequestMapping("/verificationCodeEques")
+	@ResponseBody
+	public JsonResult verificationCodeEques(String code) {
+		code = code.toLowerCase();
+		if (code.equals(this.code)) {
+			return new JsonResult(1, "验证码正确");
+		} else {
+			return new JsonResult(0, "验证码错误");
 		}
-		
-		@RequestMapping("/doSaveUser")
-		@ResponseBody
-		public JsonResult doSaveUser(String mail,String name,String password) {
-			aqsUser user = new aqsUser();
-			user.setUserAccount(mail);
-			user.setUserNickname(name);
-			user.setUserPassword(password);
-			user.setUserCreateTime(new Date());
-			user.setUserValid("1");
-			user.setUserIntroduce("null");
-			return new JsonResult(userservice.saveUser(user));
-		}
-		
+	}
+
+	@RequestMapping("/doSaveUser")
+	@ResponseBody
+	public JsonResult doSaveUser(String mail, String name, String password) {
+		AqsUser user = new AqsUser();
+		user.setUserAccount(mail);
+		user.setUserNickname(name);
+		user.setUserPassword(password);
+		user.setUserCreateTime(new Date());
+		user.setUserValid("1");
+		user.setUserIntroduce("null");
+		return new JsonResult(userservice.saveUser(user));
+	}
 }

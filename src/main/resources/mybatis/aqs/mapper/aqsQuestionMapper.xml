@@ -4,7 +4,7 @@
 	
 	
 	<resultMap id="BaseResultMap"
-		type="team.spring.aqs.entity.aqsQuestion">
+		type="team.spring.aqs.entity.AqsQuestion">
 		<id column="question_id" jdbcType="VARCHAR" property="questionId" />
 		<result column="user_account" jdbcType="VARCHAR"
 			property="userAccount" />
@@ -24,7 +24,7 @@
 	
 	
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
-		type="team.spring.aqs.entity.aqsQuestion">
+		type="team.spring.aqs.entity.AqsQuestion">
 		<result column="question_content" jdbcType="LONGVARCHAR"
 			property="questionContent" />
 	</resultMap>
@@ -52,7 +52,7 @@
 		where question_id = #{questionId,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert"
-		parameterType="team.spring.aqs.entity.aqsQuestion">
+		parameterType="team.spring.aqs.entity.AqsQuestion">
 		insert into aqs_question (question_id, user_account, question_introduce,
 		question_preview_count, question_praise, question_ifpublic,
 		question_type_id, question_create_time, question_content
@@ -68,7 +68,7 @@
 		)
 	</insert>
 	<insert id="insertSelective"
-		parameterType="team.spring.aqs.entity.aqsQuestion">
+		parameterType="team.spring.aqs.entity.AqsQuestion">
 		insert into aqs_question
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="questionId != null">
@@ -130,7 +130,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="team.spring.aqs.entity.aqsQuestion">
+		parameterType="team.spring.aqs.entity.AqsQuestion">
 		update aqs_question
 		<set>
 			<if test="userAccount != null">
@@ -161,7 +161,7 @@
 		where question_id = #{questionId,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs"
-		parameterType="team.spring.aqs.entity.aqsQuestion">
+		parameterType="team.spring.aqs.entity.AqsQuestion">
 		update aqs_question
 		set user_account = #{userAccount,jdbcType=VARCHAR},
 		question_introduce = #{questionIntroduce,jdbcType=VARCHAR},
@@ -174,7 +174,7 @@
 		where question_id = #{questionId,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="team.spring.aqs.entity.aqsQuestion">
+		parameterType="team.spring.aqs.entity.AqsQuestion">
 		update aqs_question
 		set user_account = #{userAccount,jdbcType=VARCHAR},
 		question_introduce = #{questionIntroduce,jdbcType=VARCHAR},
@@ -204,7 +204,7 @@
 	</select>
   
   
-  <select id="findObjects" resultType="team.spring.aqs.entity.aqsQuestion">
+  <select id="findObjects" resultType="team.spring.aqs.entity.AqsQuestion">
 		select * from aqs_question where question_id=#{id}
 	</select>
 </mapper>

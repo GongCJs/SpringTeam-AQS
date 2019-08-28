@@ -1,17 +1,17 @@
 package team.spring.aqs.mapper;
 
-import team.spring.aqs.entity.aqsRoles;
+import team.spring.aqs.entity.AqsRoles;
 
 public interface aqsRolesMapper {
     int deleteByPrimaryKey(String roleId);
 
-    int insert(aqsRoles record);
+    int insert(AqsRoles record);
 
-    int insertSelective(aqsRoles record);
+    int insertSelective(AqsRoles record);
 
-    aqsRoles selectByPrimaryKey(String roleId);
+    AqsRoles selectByPrimaryKey(String roleId);
 
-    int updateByPrimaryKeySelective(aqsRoles record);
+    int updateByPrimaryKeySelective(AqsRoles record);
 
-    int updateByPrimaryKey(aqsRoles record);
+    int updateByPrimaryKey(AqsRoles record);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.spring.aqs.mapper.aqsMenusMapper">
-  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.aqsMenus">
+  <resultMap id="BaseResultMap" type="team.spring.aqs.entity.AqsMenus">
     <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
@@ -29,7 +29,7 @@
     delete from aqs_menus
     where menu_id = #{menuId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="team.spring.aqs.entity.aqsMenus">
+  <insert id="insert" parameterType="team.spring.aqs.entity.AqsMenus">
     insert into aqs_menus (menu_id, menu_name, menu_url, 
       menu_type, menu_sort, menu_note, 
       menu_parent_id, menu_permission, menu_created_time, 
@@ -41,7 +41,7 @@
       #{menuModifiedTime,jdbcType=TIMESTAMP}, #{menuCreatedUser,jdbcType=VARCHAR}, #{menuModifiedUser,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="team.spring.aqs.entity.aqsMenus">
+  <insert id="insertSelective" parameterType="team.spring.aqs.entity.AqsMenus">
     insert into aqs_menus
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="menuId != null">
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.aqsMenus">
+  <update id="updateByPrimaryKeySelective" parameterType="team.spring.aqs.entity.AqsMenus">
     update aqs_menus
     <set>
       <if test="menuName != null">
@@ -159,7 +159,7 @@
     </set>
     where menu_id = #{menuId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.aqsMenus">
+  <update id="updateByPrimaryKey" parameterType="team.spring.aqs.entity.AqsMenus">
     update aqs_menus
     set menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},

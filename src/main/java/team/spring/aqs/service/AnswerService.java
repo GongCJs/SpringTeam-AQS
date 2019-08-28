@@ -1,9 +1,9 @@
 package team.spring.aqs.service;
 
 import java.util.List;
-import team.spring.aqs.entity.aqsAnswer;
+import team.spring.aqs.entity.AqsAnswer;
 
 public interface AnswerService {
-	int addAnswer(aqsAnswer answer);
-	List<aqsAnswer> findAnswerByQuestionid(String questionId);
+	int addAnswer(AqsAnswer answer);
+	List<AqsAnswer> findAnswerByQuestionid(String questionId);
 }

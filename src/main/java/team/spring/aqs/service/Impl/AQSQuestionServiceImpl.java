@@ -8,8 +8,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.spring.aqs.entity.aqsQuestion;
-import team.spring.aqs.entity.aqsUser;
+import team.spring.aqs.entity.AqsQuestion;
+import team.spring.aqs.entity.AqsUser;
 import team.spring.aqs.exception.ServiceException;
 import team.spring.aqs.mapper.aqsQuestionMapper;
 import team.spring.aqs.service.AQSQuestionService;
@@ -21,9 +21,9 @@ public class AQSQuestionServiceImpl implements AQSQuestionService {
 	
 	@RequiresUser
 	@Override
-	public int insert(aqsQuestion record) {
+	public int insert(AqsQuestion record) {
 		Subject sub = SecurityUtils.getSubject(); 
-		aqsUser userinfo = (aqsUser)sub.getPrincipal();
+		AqsUser userinfo = (AqsUser)sub.getPrincipal();
 		record.setUserAccount(userinfo.getUserAccount());
 		int insert = quemapper.insertSelective(record);
 		if(insert == 0) {
@@ -33,8 +33,8 @@ public class AQSQuestionServiceImpl implements AQSQuestionService {
 	}
 
 	@Override
-	public aqsQuestion selectByPrimaryKey(String questionId) {
-		aqsQuestion selectByPrimaryKey = quemapper.selectByPrimaryKey(questionId);
+	public AqsQuestion selectByPrimaryKey(String questionId) {
+		AqsQuestion selectByPrimaryKey = quemapper.selectByPrimaryKey(questionId);
 		if(selectByPrimaryKey == null) {
 			throw new ServiceException("系统中没有该数据");
 		}
@@ -42,17 +42,17 @@ public class AQSQuestionServiceImpl implements AQSQuestionService {
 	}
 
 	@Override
-	public List<aqsQuestion> findQuestionByType(String questionTypeId,Integer type) {
-		List<aqsQuestion> findQuestionByType = quemapper.findQuestionByType(questionTypeId,type);
+	public List<AqsQuestion> findQuestionByType(String questionTypeId, Integer type) {
+		List<AqsQuestion> findQuestionByType = quemapper.findQuestionByType(questionTypeId,type);
 		return findQuestionByType;
 	}
 
 	@Override
-	public List<aqsQuestion> findQuestionBySearch(String search) {
+	public List<AqsQuestion> findQuestionBySearch(String search) {
 		if(search==null || search=="") {
 			return quemapper.findQuestionByType(null,1);
 		}else {
-			List<aqsQuestion> findQuestionByType = quemapper.findQuestionBySearch(search);
+			List<AqsQuestion> findQuestionByType = quemapper.findQuestionBySearch(search);
 			return findQuestionByType;
 		}
 	}

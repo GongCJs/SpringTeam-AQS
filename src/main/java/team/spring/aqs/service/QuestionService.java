@@ -2,13 +2,13 @@ package team.spring.aqs.service;
 
 import java.util.List;
 
-import team.spring.aqs.entity.aqsQuestion;
-import team.spring.aqs.entity.aqsQuestionType;
+import team.spring.aqs.entity.AqsQuestion;
+import team.spring.aqs.entity.AqsQuestionType;
 
 public interface QuestionService {
 
-	List<aqsQuestion> findObjects(String id);
+	List<AqsQuestion> findObjects(String id);
 
-	List<aqsQuestionType> findObjectsTypes();
+	List<AqsQuestionType> findObjectsTypes();
 	
 }

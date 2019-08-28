@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsMenus {
+public class AqsMenus {
     private String menuId;
 
     private String menuName;

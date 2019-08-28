@@ -5,23 +5,23 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import team.spring.aqs.entity.aqsAnswer;
+import team.spring.aqs.entity.AqsAnswer;
 
 public interface aqsAnswerMapper {
     int deleteByPrimaryKey(String answerId);
 
-    int insert(aqsAnswer record);
+    int insert(AqsAnswer record);
 
-    int insertSelective(aqsAnswer record);
+    int insertSelective(AqsAnswer record);
 
-    aqsAnswer selectByPrimaryKey(String answerId);
+    AqsAnswer selectByPrimaryKey(String answerId);
 
-    int updateByPrimaryKeySelective(aqsAnswer record);
+    int updateByPrimaryKeySelective(AqsAnswer record);
 
-    int updateByPrimaryKeyWithBLOBs(aqsAnswer record);
+    int updateByPrimaryKeyWithBLOBs(AqsAnswer record);
 
-    int updateByPrimaryKey(aqsAnswer record);
+    int updateByPrimaryKey(AqsAnswer record);
     
     @Select("SELECT * FROM aqs_answer WHERE question_id = #{questionId} order by answer_create_time desc")
-    public List<aqsAnswer> findAnswerByQuestionid(@Param("questionId")String questionId);
+    public List<AqsAnswer> findAnswerByQuestionid(@Param("questionId")String questionId);
 }

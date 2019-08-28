@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsRoles {
+public class AqsRoles {
     private String roleId;
 
     private String roleName;

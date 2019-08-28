@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import java.util.Date;
 
 
 @Data
@@ -13,21 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsLogs {
-    private String logId;
+public class AqsUserRoles {
+    private String urId;
 
-    private String username;
+    private String userId;
 
-    private String operation;
-
-    private String method;
-
-    private String params;
-
-    private Long time;
-
-    private String ip;
-
-    private Date createdTime;
-
+    private String roleId;
 }

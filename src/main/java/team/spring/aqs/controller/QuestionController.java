@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import team.spring.aqs.entity.aqsQuestion;
+import team.spring.aqs.entity.AqsQuestion;
 import team.spring.aqs.service.AQSQuestionService;
 import team.spring.aqs.util.UuidUtils;
 import team.spring.aqs.vo.JsonResult;
@@ -26,7 +26,7 @@ public class QuestionController {
 			Integer questionIfpublic
 		)
 	{
-		aqsQuestion record = new aqsQuestion();
+		AqsQuestion record = new AqsQuestion();
 		record.setQuestionContent(questionContent);
 		record.setQuestionIntroduce(questionIntroduce);
 		record.setQuestionTypeId(questionTypeId);
@@ -43,14 +43,14 @@ public class QuestionController {
 	@RequestMapping("doFindQuestionByType")
 	@ResponseBody
 	public JsonResult findQuestionByType(String questionTypeId,Integer type) {
-		List<aqsQuestion> findQuestionByType = queService.findQuestionByType(questionTypeId,type);
+		List<AqsQuestion> findQuestionByType = queService.findQuestionByType(questionTypeId,type);
 		return new JsonResult(findQuestionByType);
 	}
 
 	@RequestMapping("search")
 	@ResponseBody
 	public JsonResult search(String search) {
-		List<aqsQuestion> findQuestionByType = queService.findQuestionBySearch(search);
+		List<AqsQuestion> findQuestionByType = queService.findQuestionBySearch(search);
 		return new JsonResult(findQuestionByType);
 	}
 	
@@ -58,7 +58,7 @@ public class QuestionController {
 	@RequestMapping("findQuestion.do")
 	@ResponseBody
 	public JsonResult findQuestion(String questionId) throws Exception {
-		aqsQuestion result = queService.selectByPrimaryKey(questionId);
+		AqsQuestion result = queService.selectByPrimaryKey(questionId);
 		queService.addQuestionPreviewCount(questionId);
 		return new JsonResult(result);
 	}

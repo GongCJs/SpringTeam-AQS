@@ -6,8 +6,11 @@ package team.spring.aqs.config;/**
  * @version: 1.0
  */
 
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -24,13 +27,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author     ：GongCJ
- * @date       ：Created in 2019/08/27 15:36
+ * @author ：GongCJ
+ * @date ：Created in 2019/08/27 15:36
  * @description：Shiro配置文件
  * @modified By：
  * @version: $
@@ -39,8 +41,8 @@ import java.util.Map;
 
 /**
  * 告诉spring容器 交给spring管理，且是一个配置类
- * @author Gongcj
  *
+ * @author Gongcj
  */
 @Configuration
 public class SpringShiroConfig {
@@ -50,11 +52,31 @@ public class SpringShiroConfig {
 	 */
 	@Bean("securityManager")
 	public SecurityManager newSecurityManager(
+			//指定Realm，自己编写的AuthorizingRealm
 			@Autowired
-			Realm realm
-	){
+			@Qualifier("shiroUserRealm")
+					Realm realm,
+
+			//指定缓存管理
+			@Autowired
+			@Qualifier("shiroCacheManager")
+					CacheManager cacheManager,
+
+			//指定记住我
+			@Autowired
+			@Qualifier("shiroRememberMeManager")
+					RememberMeManager rememberMeManager,
+
+			//设置会话管理
+			@Autowired
+			@Qualifier("shiroSessionManager")
+					SessionManager sessionManager
+	) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(realm);
+		securityManager.setCacheManager(cacheManager);
+		securityManager.setRememberMeManager(rememberMeManager);
+		securityManager.setSessionManager(sessionManager);
 		return securityManager;
 	}
 
@@ -64,32 +86,33 @@ public class SpringShiroConfig {
 	 */
 	@Bean("shiroFilterFactoryBean")
 	public ShiroFilterFactoryBean newShiroFilterFactoryBean(
-		@Autowired
-		@Qualifier("securityManager")
-		SecurityManager securityManager
-	){
+			@Autowired
+			@Qualifier("securityManager")
+					SecurityManager securityManager
+	) {
 		//创建一个ShiroFilterFactoryBean（资源过滤工厂）
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		//配置资源所需权限
 		Map<String, String> map = new LinkedHashMap<>();
-		map.put("/bower_components/**","anon");
-		map.put("/build/**","anon");
-		map.put("/dist/**" ,"anon");
-		map.put("/plugins/**","anon" );
-		map.put("/index","anon" );
-		map.put("/**","anon");
+		map.put("/bower_components/**", "anon");
+		map.put("/build/**", "anon");
+		map.put("/dist/**", "anon");
+		map.put("/plugins/**", "anon");
+		map.put("/index", "anon");
+		map.put("/**", "anon");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 		shiroFilterFactoryBean.setLoginUrl("/index");
 		return shiroFilterFactoryBean;
 	}
+
 
 	/*
 		第三步：
 		创建FilterRegistrationBean对象，构建注册过滤对象。
 	 */
 	@Bean("filterRegistrationBean")
-	public FilterRegistrationBean newFilterRegistrationBean(){
+	public FilterRegistrationBean newFilterRegistrationBean() {
 		//构建注册过滤器对象
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 
@@ -117,20 +140,18 @@ public class SpringShiroConfig {
 	public LifecycleBeanPostProcessor newLifecycleBeanPostProcessor() {
 		return new LifecycleBeanPostProcessor();
 	}
-
 	//配置代理创建器对象(通过此配置要为目标业务对象创建代理对象)
 	@Bean("defaultAdvisorAutoProxyCreator")
 	@DependsOn("lifecycleBeanPostProcessor")
 	public DefaultAdvisorAutoProxyCreator newDefaultAdvisorAutoProxyCreator() {
 		return new DefaultAdvisorAutoProxyCreator();
 	}
-
 	//授权属性的Advisor配置
 	@Bean("authorizationAttributeSourceAdvisor")
 	public AuthorizationAttributeSourceAdvisor newAuthorizationAttributeSourceAdvisor(
-		@Autowired
-		@Qualifier("securityManager")
-		SecurityManager securityManager
+			@Autowired
+			@Qualifier("securityManager")
+					SecurityManager securityManager
 	) {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
@@ -138,31 +159,28 @@ public class SpringShiroConfig {
 	}
 
 
-
 	/*
 		第五步：
 		配置记住我
 	 */
-
 	//配置cookie对象(负责记住用户信息)
-	@Bean("rememberMeCookie")
-	public SimpleCookie newSimpleCookie(){
+	@Bean("shiroRememberMeCookie")
+	public SimpleCookie newSimpleCookie() {
 		//设置cookie名字
-		SimpleCookie sc =new SimpleCookie("rememberMe");
+		SimpleCookie sc = new SimpleCookie("rememberMe");
 
 		//设置有效时间
-		sc.setMaxAge(60*60*12*10);
+		sc.setMaxAge(60 * 60 * 12 * 10);
 		return sc;
 	}
 	//记住我设置
-	@Bean("rememberMeManager")
+	@Bean("shiroRememberMeManager")
 	public CookieRememberMeManager newCookieRememberMeManager
 	(
-		@Autowired
-		@Qualifier("rememberMeCookie")
-		SimpleCookie rememberMeCookie
-	)
-	{
+			@Autowired
+			@Qualifier("shiroRememberMeCookie")
+					SimpleCookie rememberMeCookie
+	) {
 		CookieRememberMeManager crmm = new CookieRememberMeManager();
 		crmm.setCookie(rememberMeCookie);
 		return crmm;
@@ -173,9 +191,8 @@ public class SpringShiroConfig {
 		第六步：
 		配置缓存管理器
 	 */
-	@Bean("cacheManager")
-	public MemoryConstrainedCacheManager newMemoryConstrainedCacheManager()
-	{
+	@Bean("shiroCacheManager")
+	public MemoryConstrainedCacheManager newMemoryConstrainedCacheManager() {
 		MemoryConstrainedCacheManager mccm = new MemoryConstrainedCacheManager();
 		return mccm;
 	}
@@ -185,7 +202,7 @@ public class SpringShiroConfig {
 		第七步：
 		配置会话管理
 	 */
-	@Bean("sessionManager")
+	@Bean("shiroSessionManager")
 	public DefaultWebSessionManager newDefaultWebSessionManager() {
 		DefaultWebSessionManager dsm = new DefaultWebSessionManager();
 		//设置全局会话超时时间，默认30分钟，即如果30分钟内没有访问会话将过期 1800000

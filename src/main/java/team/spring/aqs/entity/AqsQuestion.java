@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsQuestion {
+public class AqsQuestion {
     private String questionId;
 
     private String userAccount;

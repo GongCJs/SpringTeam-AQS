@@ -1,12 +1,11 @@
 package team.spring.aqs.entity;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import java.util.Date;
 
 
 @Data
@@ -14,18 +13,21 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class aqsAnswer {
-    private String answerId;
+public class AqsLogs {
+    private String logId;
 
-    private String userAccount;
+    private String username;
 
-    private String questionId;
+    private String operation;
 
-    private String answerSubId;
+    private String method;
 
-    private Date answerCreateTime;
+    private String params;
 
-    private String answerContent;
+    private Long time;
 
-    
+    private String ip;
+
+    private Date createdTime;
+
 }
